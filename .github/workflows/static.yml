@@ -34,10 +34,11 @@ jobs:
       - name: Verificar se o index/ existe
         id: check_file
         run: |
-          if [-f "public/index.html"]; then
-            echo "exists=true" >> $GITHUB_OUTPUT
+          if [ ! -f "public/index.html" ]; then
+            echo "::error:: Index.html não encontrado em public/"
+            exit 1
           else
-            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "exists=true" >> $GITHUB_OUTPUT
           fi
       - name: Setup Pages
         uses: actions/configure-pages@v5
