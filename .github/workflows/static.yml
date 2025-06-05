@@ -31,6 +31,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Verificar se o index/ existe
+        id: check_file
+        run: |
+          if [-f "public/index.html"]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
